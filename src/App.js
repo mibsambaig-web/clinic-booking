@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import Login from './components/Login/login'
+import Sidebar from './components/Admin/Sidebar'
+import AdminDashboard from './components/Admin/AdminDashboard'
+
+import { useState } from "react";
+
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('login')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {currentPage === 'login' && <Login onLogin={ setCurrentPage } />}
+      {currentPage === 'admin' && <AdminDashboard onLogout={() => setCurrentPage('login')} />}
+      {currentPage === 'patient' && <h1>Patient Booking</h1>}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

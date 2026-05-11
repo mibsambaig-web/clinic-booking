@@ -1,0 +1,13 @@
+.dashboard-layout {
+
+    display: flex;
+    min-height: 100vh;
+    background: #0c0c0e;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.main-content {
+    margin-left: 240px;
+    flex: 1;
+    padding: 2rem;
+}
