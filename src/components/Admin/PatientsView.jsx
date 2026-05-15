@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './PatientsView.css';
 
 function PatientsView() {

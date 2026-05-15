@@ -49,7 +49,7 @@ function AppointmentsView() {
                             </div>
                             <span>{apt.time}</span>
                             <span>{apt.service}</span>
-                            <span className={'status-badge ${apt.status}'}>{apt.status}</span>
+                            <span className={`status-badge ${apt.status}`}>{apt.status}</span>
                             <div className="action-buttons">
                             <button className='btn-confirm' onClick={() => handleConfirm(apt.id)}>Confirm</button>
                             <button className='btn-cancel' onClick={() => handleCancel(apt.id)}>Cancel</button>

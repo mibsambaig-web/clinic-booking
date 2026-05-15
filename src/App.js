@@ -1,5 +1,4 @@
 import Login from './components/Login/Login'
-import Sidebar from './components/Admin/Sidebar'
 import AdminDashboard from './components/Admin/AdminDashboard'
 import PatientBooking from './components/Patient/PatientBooking'
 
