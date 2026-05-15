@@ -1,6 +1,7 @@
-import Login from './components/Login/login'
+import Login from './components/Login/Login'
 import Sidebar from './components/Admin/Sidebar'
 import AdminDashboard from './components/Admin/AdminDashboard'
+import PatientBooking from './components/Patient/PatientBooking'
 
 import { useState } from "react";
 
@@ -12,7 +13,7 @@ function App() {
     <div>
       {currentPage === 'login' && <Login onLogin={ setCurrentPage } />}
       {currentPage === 'admin' && <AdminDashboard onLogout={() => setCurrentPage('login')} />}
-      {currentPage === 'patient' && <h1>Patient Booking</h1>}
+      {currentPage === 'patient' && <PatientBooking onLogout={() => setCurrentPage('login')} />}
     </div>
   )
 }
