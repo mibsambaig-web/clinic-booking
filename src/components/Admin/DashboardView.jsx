@@ -1,25 +1,36 @@
 
+import { useState, useEffect } from 'react'
 import './DashboardView.css'
-import { useState } from 'react'
+
 
 function DashboardView() {
-    const [ appointments, setAppointments ] = useState ([
-        { id: 1, name: 'Ahmed Siddiqui', initials: 'AS', time: '09:00 AM', service: 'General Checkup', status: 'confirmed', date: '9 May 2026', phone: '0300-1234567' },
-        { id: 2, name: 'Fatima Malik', initials: 'FM', time: '09:45 AM', service: 'Dental Cleaning', status: 'confirmed', date: '9 May 2026', phone: '0321-9876543' },
-        { id: 3, name: 'Bilal Hassan', initials: 'BH', time: '10:30 AM', service: 'Root Canal', status: 'pending', date: '9 May 2026', phone: '0333-5550001' },
-        { id: 4, name: 'Sara Qureshi', initials: 'SQ', time: '11:15 AM', service: 'Consultation', status: 'confirmed', date: '9 May 2026', phone: '0311-2223344' },
-        { id: 5, name: 'Omar Farooq', initials: 'OF', time: '12:00 PM', service: 'Teeth Whitening', status: 'pending', date: '9 May 2026', phone: '0345-6677889' },
-      ])
+    const [ appointments, setAppointments ] = useState ([])
+
+    useEffect(() => {
+        fetch('https://clinic-backend-production-276e.up.railway.app/appointments')
+        .then(res => res.json())
+        .then(data => setAppointments(data))
+    }, [])
 
       function handleConfirm(id) {
-        setAppointments(appointments.map(apt => 
-            apt.id === id ? { ...apt, status: 'confirmed' } : apt
-        ))
+        fetch(`https://clinic-backend-production-276e.up.railway.app/appointments/${id}/confirm`, {
+            method: 'PATCH'
+        })
+        .then(res => res.json())
+        .then(updated => {
+            setAppointments(appointments.map(apt =>
+                apt.id === id ? updated : apt
+            ))
+        })
       }
 
       function handleCancel(id) {
-        setAppointments(appointments.filter(apt => apt.id !== id
-        ))
+        fetch(`https://clinic-backend-production-276e.up.railway.app/appointments/${id}`, {
+            method: 'DELETE'
+        })
+        .then(() => {
+            setAppointments(appointments.filter(apt => apt.id !== id))
+        })
       }
     
     const stats = [

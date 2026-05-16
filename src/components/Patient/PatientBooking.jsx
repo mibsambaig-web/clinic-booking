@@ -101,7 +101,26 @@ function PatientBooking({ onLogout }) {
                         </div>
                         <div className='nav-buttons'>
                             <button className='back-btn' onClick={() => setStep(2)}>Back</button>
-                            <button className='next-btn' onClick={() => selected.name && selected.phone && setStep(4)}>Next</button>
+                            <button className='next-btn' onClick={async () => {
+                                if (selected.name && selected.phone) {
+                                    try {
+                                        await fetch('https://clinic-backend-production-276e.up.railway.app/appointments', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({
+                                                name: selected.name,
+                                                phone: selected.phone,
+                                                service: selected.service,
+                                                date: selected.date,
+
+                                            })
+                                        })
+                                    } catch (err) {
+                                        console.error(err)
+                                    }
+                                    setStep(4)
+                                }
+                            }}>Next</button>
                         </div>
                     </div>
                 )}
